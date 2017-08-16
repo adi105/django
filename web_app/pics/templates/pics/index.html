@@ -1,0 +1,11 @@
+{% if all_folders %}
+    <h3>Here are your picture folders:</h3>
+    <ul>
+        {% for folder in all_folders %}
+        <li><a href="{% url 'pics:detail' folder.id %}">{{folder.folder_name}}</a></li>
+        {% endfor %}
+    </ul>
+
+{% else %}
+    <h3>You don't have any albums added.</h3>
+{% endif %}

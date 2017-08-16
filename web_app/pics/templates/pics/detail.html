@@ -1,0 +1,23 @@
+<img src="{{ folder.folder_logo }}">
+
+<h1>{{ folder.folder_name }}</h1>
+<h3>{{ folder.photographer }}</h3>
+
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="{% url 'pics:favorite' folder.id %}" method="post">
+    {% csrf_token %}
+    {% for photo in folder.photo_set.all %}
+        <input type="checkbox" id="photo{{ forloop.counter }}" name="photo" value="{{ photo.id }}">
+        <label for="photo{{ forloop.counter }}">
+            {{ photo.photo_name }}
+
+            {% if photo.is_favorite %}
+                <img src="https://forums.therian-guide.com/images/2/star.png">
+            {% endif %}
+        </label><br/>
+    {% endfor %}
+    <input type="submit" value="Favorite">
+</form>
