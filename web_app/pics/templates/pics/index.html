@@ -1,11 +1,77 @@
-{% if all_folders %}
-    <h3>Here are your picture folders:</h3>
-    <ul>
-        {% for folder in all_folders %}
-        <li><a href="{% url 'pics:detail' folder.id %}">{{folder.folder_name}}</a></li>
-        {% endfor %}
-    </ul>
+<!-- loads path to static files -->
+{% load staticfiles %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="{% static 'pictures/style.css' %}">
+<link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-{% else %}
-    <h3>You don't have any albums added.</h3>
-{% endif %}
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span> <!-- this has the three lines for the options menu when the page is shrunk -->
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'pics:index' %}">Imry</a>
+        </div>
+
+        <!-- Individual items in the navbar -->
+        <div class="collapse navbar-collapse" id="topNavBar"> <!-- This makes the collapse three bar button work -->
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="{% url 'pics:index' %}">
+                        <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;
+                        Folders
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>&nbsp;
+                        Pictures
+                    </a>
+                </li
+            </ul>
+
+            <form class="navbar-form navbar-left" role="search" method="get" action="#">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="q" value="">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Folder
+                    </a>
+                </li>
+
+                <li class="">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<body>
+    {% if all_folders %}
+        <div class="container-fluid">
+        <h3>Here are your picture folders:</h3>
+        <ul>
+            {% for folder in all_folders %}
+            <li><a href="{% url 'pics:detail' folder.id %}">{{folder.folder_name}}</a></li>
+            {% endfor %}
+        </ul>
+        </div>
+
+    {% else %}
+        <h3>You don't have any albums added.</h3>
+    {% endif %}
+</body>

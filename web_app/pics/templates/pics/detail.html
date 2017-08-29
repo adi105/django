@@ -10,7 +10,7 @@
 <form action="{% url 'pics:favorite' folder.id %}" method="post">
     {% csrf_token %}
     {% for photo in folder.photo_set.all %}
-        <input type="checkbox" id="photo{{ forloop.counter }}" name="photo" value="{{ photo.id }}">
+        <input type="radio" id="photo{{ forloop.counter }}" name="photo" value="{{ photo.id }}">
         <label for="photo{{ forloop.counter }}">
             {{ photo.photo_name }}
 

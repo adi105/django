@@ -25,6 +25,9 @@ def favorite(request, album_id):
             'error_message': "You did not select a valid photo"
         })
     else:
-        selected_photo.is_favorite = True
+        if selected_photo.is_favorite:
+            selected_photo.is_favorite = False
+        else:
+            selected_photo.is_favorite = True
         selected_photo.save()
         return render(request, 'pics/detail.html', {'folder': folder})
